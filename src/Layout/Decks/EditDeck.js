@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouteMatch } from "react-router-dom";
-import { readDeck } from "../../utils/api";
+import { deleteDeck, readDeck } from "../../utils/api";
 import Breadcrumb from "../Common/Breadcrumb";
 import DeckForm from "../Common/DeckForm";
 
@@ -34,7 +34,9 @@ function EditDeck() {
             { name: "Edit Deck" },
           ]}
         />
-        <h2>Edit Deck</h2>
+        <h2>
+          Edit Deck: <span>{deck.name}</span>
+        </h2>
         <DeckForm
           name={deck.name}
           description={deck.description}

@@ -69,8 +69,8 @@ function CardForm({
           id="front"
           name="front"
           onChange={changeHandler}
-          placeholder={cardInfo.front}
           rows="4"
+          placeholder={cardInfo.front}
           value={cardInfo.front}
         ></textarea>
       </div>
@@ -81,8 +81,8 @@ function CardForm({
           id="back"
           name="back"
           onChange={changeHandler}
-          placeholder={cardInfo.back}
           rows="4"
+          placeholder={cardInfo.back}
           value={cardInfo.back}
         ></textarea>
       </div>

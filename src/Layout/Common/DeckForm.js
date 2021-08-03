@@ -3,10 +3,8 @@ import { useRouteMatch, useHistory } from "react-router-dom";
 import { updateDeck, createDeck } from "../../utils/api";
 
 function DeckForm({
-  name,
-  description,
-  namePlaceholder,
-  descriptionPlaceholder,
+  name = "Deck Name",
+  description = "A brief description of the deck",
 }) {
   const {
     url,
@@ -74,7 +72,7 @@ function DeckForm({
           id="form-name"
           name="name"
           onChange={changeHandler}
-          placeholder={namePlaceholder}
+          placeholder={deckInfo.name}
           value={deckInfo.name}
         ></input>
       </div>
@@ -85,8 +83,8 @@ function DeckForm({
           id="description"
           name="description"
           onChange={changeHandler}
-          placeholder={descriptionPlaceholder}
           rows="4"
+          placeholder={deckInfo.description}
           value={deckInfo.description}
         ></textarea>
       </div>

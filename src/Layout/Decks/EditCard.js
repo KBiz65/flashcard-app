@@ -52,7 +52,9 @@ function EditCard() {
             { name: `Edit Card ${cardId}` },
           ]}
         />
-        <h2>Edit Card</h2>
+        <h2>
+          Edit Card: <span>{deck.name}</span>
+        </h2>
         <CardForm front={card.front} back={card.back} />
       </div>
     );
