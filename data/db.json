@@ -12,43 +12,23 @@
     },
     {
       "id": 3,
-      "name": "Testing Deck",
-      "description": "This is a deck just for testing"
+      "name": "Test Deck",
+      "description": "A bunch of different test cards."
     },
     {
       "id": 4,
-      "name": "Deck Name",
-      "description": "Brief description of the deck"
+      "name": "Mock squash",
+      "description": "Description"
     },
     {
       "id": 5,
-      "name": "Deck 5",
-      "description": "This is the 5th deck that has been created."
+      "name": "Mock squash 2",
+      "description": "Another brief description"
     },
     {
       "id": 6,
-      "name": "Deck 5",
-      "description": "This is the 5th deck that has been created."
-    },
-    {
-      "id": 7,
-      "name": "Deck 5",
-      "description": "This is the 5th deck that has been created."
-    },
-    {
-      "id": 8,
-      "name": "Deck 8",
-      "description": "This is the 8th deck that has been created."
-    },
-    {
-      "id": 9,
-      "name": "9th Deck",
-      "description": "Testing the 9th deck"
-    },
-    {
-      "id": 10,
-      "name": "Front-end Development",
-      "description": "All front-end development questions that will allow the user to study for their front-end mock interview."
+      "name": "New Deck ",
+      "description": "Description of deck"
     }
   ],
   "cards": [
@@ -66,28 +46,27 @@
     },
     {
       "id": 3,
-      "front": "How do you pass data 'down' to a React child component?",
+      "front": "How do you pass data 'down' to a React child component?????",
       "back": "As properties or props",
       "deckId": 1
     },
     {
-      "front": "What path will match the follow Route?\n<Route>\n  <NotFound />\n</Route>",
+      "id": 4,
+      "front": "What path will match the follow Route????\n<Route>\n  <NotFound />\n</Route>",
       "back": "All paths. A route with no path matches all URL's",
-      "deckId": 2,
-      "id": 4
+      "deckId": 2
     },
     {
+      "id": 5,
       "front": "What does <Switch> do?",
       "back": "Renders the first matching child <Route> ",
-      "deckId": 2,
-      "id": 5
+      "deckId": 2
     },
     {
-      "cards": [],
-      "front": "b",
-      "back": "b",
-      "deckId": 1,
-      "id": 7
+      "id": 8,
+      "front": "This is the 5th card in this deck.",
+      "back": "Back side of the 5th card created in this deck.",
+      "deckId": 1
     }
   ]
 }

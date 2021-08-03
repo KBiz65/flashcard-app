@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouteMatch } from "react-router-dom";
 import { readDeck } from "../../utils/api";
 import Breadcrumb from "../Common/Breadcrumb";
-import DeckForm from "./DeckForm";
+import DeckForm from "../Common/DeckForm";
 
 function EditDeck() {
   const {
@@ -10,6 +10,7 @@ function EditDeck() {
   } = useRouteMatch();
   const [deck, setDeck] = useState({});
 
+  // sets the deck whenever the deckId changes
   useEffect(() => {
     const abortCtrl = new AbortController();
     readDeck(deckId, abortCtrl.signal)
@@ -34,7 +35,12 @@ function EditDeck() {
           ]}
         />
         <h2>Edit Deck</h2>
-        <DeckForm name={deck.name} description={deck.description} />
+        <DeckForm
+          name={deck.name}
+          description={deck.description}
+          namePlaceholder={deck.name}
+          descriptionPlaceholder={deck.description}
+        />
       </div>
     );
   } else {

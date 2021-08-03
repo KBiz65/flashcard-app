@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import DeleteButton from "../Common/DeleteButton";
 
 function CardListItem({ card: { id, front, back, deckId } }) {
+  const abrtSignal = new AbortController().signal;
+
   return (
     <div>
       <div className="border list-group mt-3">
@@ -12,12 +15,18 @@ function CardListItem({ card: { id, front, back, deckId } }) {
           </div>
           <div className="row mt-3">
             <div className="col d-flex justify-content-end">
-              <Link className="btn btn-secondary">
+              <Link
+                to={`/decks/${deckId}/cards/${id}/edit`}
+                className="btn btn-secondary mr-2"
+              >
                 <span className="oi oi-pencil"></span> Edit
               </Link>
-              <Link className="btn btn-danger ml-2">
-                <span className="oi oi-trash"></span>
-              </Link>
+              <DeleteButton
+                func="deleteCard"
+                deckId={deckId}
+                cardId={id}
+                abrtSignal={abrtSignal}
+              />
             </div>
           </div>
         </li>

@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import DeleteButton from "../Common/DeleteButton";
 
 function DeckListItem({ deck }) {
+  const abrtSignal = new AbortController().signal;
+
   return (
     <div className="border list-group mt-3">
       <li key={deck.id} id={deck.id} className="list-group-item">
@@ -31,9 +34,11 @@ function DeckListItem({ deck }) {
             </Link>
           </div>
           <div className="col d-flex justify-content-end">
-            <button className="btn btn-danger">
-              <span className="oi oi-trash"></span>
-            </button>
+            <DeleteButton
+              func="deleteDeck"
+              deckId={deck.id}
+              abrtSignal={abrtSignal}
+            />
           </div>
         </div>
       </li>

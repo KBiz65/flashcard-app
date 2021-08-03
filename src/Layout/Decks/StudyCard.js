@@ -3,15 +3,17 @@ import { useHistory, Link } from "react-router-dom";
 
 function StudyCard({ cards: { allCards }, index, setIndex, deckId }) {
   const [flipped, setFlipped] = useState(false);
-  const [cardFront, setCardFront] = useState(true);
+  const [cardSideShown, setCardSideShown] = useState(true);
   const history = useHistory();
 
   function handleClick(event) {
     event.preventDefault();
 
+    // flipped false = front of card
+    // flipped true = back of card
     if (event.target.name === "flipped") {
       setFlipped(true);
-      setCardFront(!cardFront);
+      setCardSideShown(!cardSideShown);
     }
 
     if (event.target.name === "next") {
@@ -21,11 +23,13 @@ function StudyCard({ cards: { allCards }, index, setIndex, deckId }) {
       } else {
         setIndex(index + 1);
         setFlipped(false);
-        setCardFront(true);
+        setCardSideShown(true);
       }
     }
   }
 
+  // if user wants to go through the cards again it will restart
+  // otherwise it will send the user back to the home screen
   function studyAgain() {
     if (
       window.confirm(
@@ -34,7 +38,7 @@ function StudyCard({ cards: { allCards }, index, setIndex, deckId }) {
     ) {
       setIndex(0);
       setFlipped(false);
-      setCardFront(true);
+      setCardSideShown(true);
     } else {
       history.push("/");
     }
@@ -60,7 +64,7 @@ function StudyCard({ cards: { allCards }, index, setIndex, deckId }) {
           <h4 className="row pl-3">
             Card {index + 1} of {allCards.length}
           </h4>
-          {cardFront === true ? (
+          {cardSideShown === true ? (
             <div className="row pl-3">{allCards[index].front}</div>
           ) : (
             <div className="row pl-3">{allCards[index].back}</div>

@@ -3,8 +3,10 @@ import { useRouteMatch, useHistory } from "react-router-dom";
 import { updateDeck, createDeck } from "../../utils/api";
 
 function DeckForm({
-  name = "Deck Name",
-  description = "Brief description of the deck",
+  name,
+  description,
+  namePlaceholder,
+  descriptionPlaceholder,
 }) {
   const {
     url,
@@ -25,16 +27,20 @@ function DeckForm({
 
     if (url === "/decks/new") {
       createDeck(deckInfo, abortCtrl.signal).then((response) => {
+        // gets the newly created deckId from createDeck function and
+        // takes user to that deck view.
         history.push(`/decks/${response.id}`);
       });
     }
 
     if (url === `/decks/${deckId}/edit`) {
       updateDeck(deckInfo, abortCtrl.signal);
+      // once the deck is updated the page can refresh to show the update
       history.go(0);
     }
   }
 
+  // makes sure the input value is controlled and continuously updated
   function changeHandler(event) {
     event.preventDefault();
     setDeckInfo({
@@ -45,6 +51,10 @@ function DeckForm({
 
   function handleButtonClick(event) {
     event.preventDefault();
+
+    // if user cancels when creating a new deck it will bring them
+    // back to the home page. If they are editing a deck cancel will
+    // just bring up that deck view again
     if (event.target.name === "cancel") {
       if (url === "/decks/new") {
         history.push("/");
@@ -64,7 +74,7 @@ function DeckForm({
           id="form-name"
           name="name"
           onChange={changeHandler}
-          placeholder={deckInfo.name}
+          placeholder={namePlaceholder}
           value={deckInfo.name}
         ></input>
       </div>
@@ -75,7 +85,7 @@ function DeckForm({
           id="description"
           name="description"
           onChange={changeHandler}
-          placeholder={deckInfo.description}
+          placeholder={descriptionPlaceholder}
           rows="4"
           value={deckInfo.description}
         ></textarea>

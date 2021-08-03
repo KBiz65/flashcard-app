@@ -3,12 +3,17 @@ import { useRouteMatch, Link } from "react-router-dom";
 import { readDeck } from "../../utils/api";
 import Breadcrumb from "../Common/Breadcrumb";
 import CardList from "./CardList";
+import DeleteButton from "../Common/DeleteButton";
 
 function DeckView() {
   const {
     params: { deckId },
   } = useRouteMatch();
   const [deck, setDeck] = useState({});
+
+  // creates an abort controller signal to send through to
+  // the delete button
+  const AbrtCtrlSignal = new AbortController().signal;
 
   useEffect(() => {
     const abortCtrl = new AbortController();
@@ -24,6 +29,7 @@ function DeckView() {
     };
   }, [deckId]);
 
+  // only renders after the deck has been loaded by useEffect
   if (deck.id) {
     return (
       <div>
@@ -54,14 +60,19 @@ function DeckView() {
                 >
                   <span className="oi oi-book"></span> Study
                 </Link>
-                <Link to="/" className="btn btn-info ml-2">
+                <Link
+                  to={`/decks/${deckId}/cards/new`}
+                  className="btn btn-info ml-2"
+                >
                   <span className="oi oi-plus"></span> Add Cards
                 </Link>
               </div>
               <div className="col-2 d-flex justify-content-end">
-                <button className="btn btn-danger">
-                  <span className="oi oi-trash"></span>
-                </button>
+                <DeleteButton
+                  func="deleteDeck"
+                  deckId={deckId}
+                  abrtSignal={AbrtCtrlSignal}
+                />
               </div>
             </div>
           </li>

@@ -12,6 +12,7 @@ function StudyDeck() {
   const [cards, setCards] = useState({});
   const [index, setIndex] = useState(-1);
 
+  // gets the deck info and sets it to the deck variable
   useEffect(() => {
     const abortCtrl = new AbortController();
     async function getDeck() {
@@ -20,6 +21,8 @@ function StudyDeck() {
     getDeck();
   }, [deckId]);
 
+  // once the deck information is set to state this will set
+  // a variable with just the cards array
   useEffect(() => {
     const abortCtrl = new AbortController();
     console.log(deck);
@@ -35,6 +38,8 @@ function StudyDeck() {
     };
   }, [deck]);
 
+  // only return this if the index has been set. If it hasn't been set
+  // it will still have a value of -1 that was the defaul value
   if (index >= 0) {
     return (
       <div>

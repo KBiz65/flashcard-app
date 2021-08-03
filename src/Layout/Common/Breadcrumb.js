@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 function Breadcrumb({ navArray }) {
   const breadcrumbLinks = navArray.map((link, index) => {
+    // if it's the last item in the array it doesn't have a link to set
     if (index === navArray.length - 1) {
       return (
         <li key={index} className="breadcrumb-item active" aria-current="page">
