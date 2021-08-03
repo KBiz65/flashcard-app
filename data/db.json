@@ -4,6 +4,11 @@
       "id": 1,
       "name": "Rendering in React",
       "description": "React's component structure allows for quickly building a complex web application that relies on DOM manipulation. "
+    },
+    {
+      "id": 2,
+      "name": "Mock Deck 33",
+      "description": "Description of Mock Deck 33"
     }
   ],
   "cards": [
@@ -24,6 +29,12 @@
       "front": "How do you pass data 'down' to a React child component?????",
       "back": "As properties or props",
       "deckId": 1
+    },
+    {
+      "id": 4,
+      "front": "Card 1 front",
+      "back": "Card 1 back",
+      "deckId": 2
     }
   ]
 }
