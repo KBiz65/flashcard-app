@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 
-function StudyCard({ cards: { allCards }, index, setIndex }) {
+function StudyCard({ cards: { allCards }, index, setIndex, deckId }) {
   const [flipped, setFlipped] = useState(false);
   const [cardFront, setCardFront] = useState(true);
   const history = useHistory();
@@ -48,10 +48,7 @@ function StudyCard({ cards: { allCards }, index, setIndex }) {
           You need at least 3 cards to study. There are {allCards.length} in
           this deck.
         </p>
-        <Link
-          className="btn btn-info"
-          to={`/decks/${allCards[index].id}/cards/new`}
-        >
+        <Link className="btn btn-info" to={`/decks/${deckId}/cards/new`}>
           <span className="oi oi-plus"></span> Add Cards
         </Link>
       </div>

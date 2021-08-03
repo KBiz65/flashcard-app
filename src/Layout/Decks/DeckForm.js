@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useRouteMatch, useHistory } from "react-router-dom";
-import { updateDeck } from "../../utils/api";
+import { updateDeck, createDeck } from "../../utils/api";
 
 function DeckForm({
   name = "Deck Name",
   description = "Brief description of the deck",
 }) {
   const {
-    params: { deckId },
+    url,
+    params: { deckId = null },
   } = useRouteMatch();
 
   const history = useHistory();
@@ -21,8 +22,17 @@ function DeckForm({
   function handleSubmit(event) {
     event.preventDefault();
     const abortCtrl = new AbortController();
-    updateDeck(deckInfo, abortCtrl.signal);
-    history.go(0);
+
+    if (url === "/decks/new") {
+      createDeck(deckInfo, abortCtrl.signal).then((response) => {
+        history.push(`/decks/${response.id}`);
+      });
+    }
+
+    if (url === `/decks/${deckId}/edit`) {
+      updateDeck(deckInfo, abortCtrl.signal);
+      history.go(0);
+    }
   }
 
   function changeHandler(event) {
@@ -36,30 +46,33 @@ function DeckForm({
   function handleButtonClick(event) {
     event.preventDefault();
     if (event.target.name === "cancel") {
-      history.push(`/decks/${deckId}`);
+      if (url === "/decks/new") {
+        history.push("/");
+      } else {
+        history.push(`/decks/${deckId}`);
+      }
     }
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <div class="form-group mt-3">
+      <div className="form-group">
         <label htmlFor="form-name">Name</label>
         <input
           type="text"
-          class="form-control"
+          className="form-control"
           id="form-name"
           name="name"
           onChange={changeHandler}
           placeholder={deckInfo.name}
           value={deckInfo.name}
         ></input>
-        <label htmlFor="form-description" className="mt-3">
-          Description
-        </label>
+      </div>
+      <div className="form-group">
+        <label htmlFor="description">Description</label>
         <textarea
-          type="text"
-          class="form-control"
-          id="form-description"
+          className="form-control"
+          id="description"
           name="description"
           onChange={changeHandler}
           placeholder={deckInfo.description}
@@ -67,16 +80,18 @@ function DeckForm({
           value={deckInfo.description}
         ></textarea>
       </div>
-      <button
-        className="btn btn-secondary"
-        name="cancel"
-        onClick={handleButtonClick}
-      >
-        Cancel
-      </button>
-      <button className="btn btn-info ml-2" name="submit" type="submit">
-        Submit
-      </button>
+      <div className="form-group">
+        <button
+          className="btn btn-secondary"
+          name="cancel"
+          onClick={handleButtonClick}
+        >
+          Cancel
+        </button>
+        <button className="btn btn-info ml-2" name="submit" type="submit">
+          Submit
+        </button>
+      </div>
     </form>
   );
 }

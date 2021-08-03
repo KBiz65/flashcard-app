@@ -22,6 +22,7 @@ function StudyDeck() {
 
   useEffect(() => {
     const abortCtrl = new AbortController();
+    console.log(deck);
     if (deck.cards) {
       setCards({
         allCards: deck.cards,
@@ -44,7 +45,12 @@ function StudyDeck() {
           ]}
         />
         <h2>Study: {deck.name}</h2>
-        <StudyCard cards={cards} index={index} setIndex={setIndex} />
+        <StudyCard
+          cards={cards}
+          index={index}
+          setIndex={setIndex}
+          deckId={deckId}
+        />
       </div>
     );
   } else {
